@@ -19,9 +19,9 @@ urlpatterns = [
     path('change-password/', views.password_change , name='change-password'),
 
     path("post-list/", views_posts.posts, name='posts'),
-    path("del-comment/<str:Id>/<str:id>/", views_posts.del_comment, name="del-comment"),
+    #path("del-comment/<str:Id>/<str:id>/", views_posts.del_comment, name="del-comment"),
     path("post-up/<str:Id>/", views_posts.post_up, name="post-up"),
-    path("post-comments/<str:Id>/", views_posts.post_comments, name='post-comments'),
+    #path("post-comments/<str:Id>/", views_posts.post, name='post-comments'),
     path("create-post/", views_posts.create_post, name="create-post"),
     path("delete-post/<str:Id>/", views_posts.del_post, name="delete-post"),
 ]
