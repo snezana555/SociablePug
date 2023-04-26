@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Редактирование чата{% endblock %}
+
+{% block header %}
+ <header class="nav">
+     <div class="nav-find">
+         <form method="GET" action="{% url 'index' %}">
+             <label>Поиск чата</label>
+             <br>
+             <input type="text" class="find" name="find" placeholder="Найти..">
+         </form>
+     </div>
+     <div class="user-name">
+         <p> Ваше имя: {{request.user}}</p>
+     </div>
+     <div class="nav-exit">
+         <a href="{% url 'log-out' %}" class="nav-exit"> Выйти </a>
+     </div>
+ </header>
+{% endblock %}
+
+{% block content %}
+  <a href="{% url 'index' %}" class="return"> < </a>
+  <br>
+  <div class="create-form">
+      <form method="POST" action="">
+        {% csrf_token %}
+          <label>Название чата:</label>
+          <input type="text" placeholder="Введите название чата..." name="name" class="input-border">
+          <br><br>
+          <label>Краткое описание:</label>
+          <textarea name="text" style="width:70vw; height:10vh; border-radius: 10px;"  placeholder=" Введите описание чата..."></textarea>
+          <br><br>
+          <input type="submit" value="Создать" class="btn"/>
+      </form>
+  </div>
+
+{% endblock content %}

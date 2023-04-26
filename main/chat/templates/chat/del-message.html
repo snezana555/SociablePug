@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Удаление сообщения{% endblock %}
+
+{% block header %}
+ <header class="nav">
+     <div class="nav-find">
+         <form method="GET" action="{% url 'index' %}">
+             <label>Поиск чата</label>
+             <br>
+             <input type="text" class="find" name="find" placeholder="Найти..">
+         </form>
+     </div>
+     <div class="user-name">
+         <p> Ваше имя: {{request.user}}</p>
+     </div>
+     <div class="nav-exit">
+         <a href="{% url 'log-out' %}" class="nav-exit"> Выйти </a>
+     </div>
+ </header>
+{% endblock %}
+
+{% block content %}
+
+  <div class="del-message">
+    <form method="POST" action="">
+    {% csrf_token %}
+      <p>Точно хотите удалить сообщение "{{message}}"? </p>
+      <input type="submit" value="Удалить" class="btn_del"/>
+    </form>
+  </div>
+{% endblock content %}
