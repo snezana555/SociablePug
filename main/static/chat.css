@@ -131,7 +131,7 @@ word-break:break-all;
 }
 
 .form{
-   display: block;
+   display: flex;
    text-align:center;
    position: fixed;
    bottom:0;

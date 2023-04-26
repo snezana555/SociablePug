@@ -22,20 +22,22 @@ def posts(request): #представление страницы со списк
     return render(request, 'post/posts.html', context)
 
 @login_required(login_url='log-in')
-def post_comments(request, Id): #представление страницы с комментариями
-    post =  Post.objects.get(id=Id)
-    comments = post.comment_set.all().order_by('date')
+def post(request, Id):
+    post_id = Post.objects.get(id=Id)
 
     if request.method == 'POST':
-        comment = Comment.objects.create(
-            user = request.user,
-            post = post,
-            words = request.POST.get('words')
-        )
-        return redirect('post-comments', Id=Id)
-    context = {'post' : post,
-               'comment' : comments[::-1],}
-    return render(request, 'post/post-comments.html', context)
+        comment = request.POST['comment']
+        new_comment = Comment(post=post_id, words=comment, user=request.user)
+        new_comment.save()
+
+    get_comments = Comment.objects.filter(post=post_id)
+
+    context = {
+        "comments": get_comments,
+        "user": request.user,
+        "post": post_id,
+    }
+    return render(request, 'post/comments.html', context)
 
 @login_required(login_url='log-in')
 def del_comment(request, Id, id): #представление страницы с удалением комментария

@@ -1,4 +1,4 @@
-.post,.create-form,.del-comment,.delete-post{
+.post-wrapper,.create-form,.del-comment,.delete-post{
     display:inline-block;
     align-items: center;
     justify-content: center;
@@ -61,8 +61,8 @@ word-break:break-all;
    font-weight: bold;
 
 }
-.comment{
-   display: block;
+.form{
+   display: flex;
    text-align:center;
    position: fixed;
    bottom:0;
@@ -80,7 +80,7 @@ word-break:break-all;
    font-weight: 900;
 }
 
-.comment-list{
+.comment{
     height:400px;
     overflow:scroll;
     overflow-x:hidden;
