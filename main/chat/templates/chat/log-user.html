@@ -8,10 +8,10 @@
       <form method="POST" action="">
           {% csrf_token %}
           <label>Ваше имя:</label>
-          <input type="text" name="user-name" class="input-border"/>
+          <input type="text" name="user-name" maxlength="10" class="input-border"/>
           <br><br>
           <label>Пароль:</label>
-          <input type="password" name="password" class="input-border"/>
+          <input type="password" name="password" min="8" class="input-border"/>
           <br><br>
           <input type="submit" value="Войти" class="btn"/>
           <br><br>
