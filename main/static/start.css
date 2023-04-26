@@ -55,5 +55,13 @@ a.but_auth {
   display: block;
 }
 
+@media screen and (max-width: 520) {
+  .box_border {
+      font-size: 12px;
+      max-width: 700px;
+      width: 50%;
+  }
+}
+
 a.but_auth:hover { background: rgb(220, 215, 215); } /* при наведении курсора мышки */
 a.but_auth:active { background: #cbdda5; } /* при нажатии */
