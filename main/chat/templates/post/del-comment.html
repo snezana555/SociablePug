@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Удаление комментария{% endblock %}
+
+{% block header %}
+ <header class="nav">
+     <div class="nav-find">
+         <form method="GET" action="{% url 'posts' %}">
+             <label>Поиск поста</label>
+             <br>
+             <input type="text" class="find" name="find" placeholder="Найти..">
+         </form>
+     </div>
+     <div class="user-name">
+         <p> Ваше имя: {{request.user}}</p>
+     </div>
+     <div class="nav-exit">
+         <a href="{% url 'log-out' %}" class="nav-exit"> Выйти </a>
+     </div>
+ </header>
+{% endblock %}
+
+{% block content %}
+
+  <div class="del-comment">
+    <form method="POST" action="">
+    {% csrf_token %}
+      <p>Точно хотите удалить комментарий "{{comment}}"? </p>
+      <input type="submit" value="Удалить" class="btn_del"/>
+    </form>
+  </div>
+{% endblock content %}

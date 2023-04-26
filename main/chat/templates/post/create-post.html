@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Создание / редактирование поста {% endblock %}
+
+{% block header %}
+ <header class="nav">
+     <div class="nav-find">
+         <form method="GET" action="{% url 'posts' %}">
+             <label>Поиск поста</label>
+             <br>
+             <input type="text" class="find" name="find" placeholder="Найти..">
+         </form>
+     </div>
+     <div class="user-name">
+         <p> Ваше имя: {{request.user}}</p>
+     </div>
+     <div class="nav-exit">
+         <a href="{% url 'log-out' %}" class="nav-exit"> Выйти </a>
+     </div>
+ </header>
+{% endblock %}
+
+{% block content %}
+  <a href="{% url 'posts' %}" class="return"> < </a>
+  <br>
+  <div class="create-form">
+      <form method="POST" action="" enctype="multipart/form-data">
+        {% csrf_token %}
+          <label>Название статьи:</label>
+          <input name="title" type="text">
+          <br><br>
+          <label>Содержание:</label>
+          <br>
+          <textarea name="content" style="width:70vw; height:30vh;"></textarea>
+          <br><br>
+          <input type="file" accept=".jpg, .jpeg" name="file">
+          <br><br>
+          <input type="submit" value="Создать" class="btn"/>
+
+      </form>
+  </div>
+
+{% endblock content %}

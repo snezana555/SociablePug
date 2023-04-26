@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Список постов{% endblock %}
+
+{% block header %}
+ <header class="nav">
+     <div class="nav-find">
+         <form method="GET" action="{% url 'posts' %}">
+             <label>Поиск поста</label>
+             <br>
+             <input type="text" class="find" name="find" placeholder="Найти..">
+         </form>
+     </div>
+     <div class="user-name">
+         <p> Ваше имя: {{request.user}}</p>
+         <a href="{% url 'index' %}"> Перейти к чатам </a>
+     </div>
+     <div class="nav-exit">
+         <a href="{% url 'log-out' %}" class="nav-exit"> Выйти </a>
+     </div>
+ </header>
+{% endblock %}
+
+{% block content %}
+  {% if find != "" %}
+  <a href="{% url 'posts' %}" class="return"> < </a>
+  <br>
+  {% endif %}
+
+  <div class="menu">
+    <a href="{% url 'create-post' %}">Создать пост</a>
+      <br>
+    {% for post in posts %}
+      <div class="menu-elements-posts">
+                    <div class="name-author-post">
+              <p>Автор:{{post.author_post.username}}</p>
+          </div>
+              <p>{{post.title}}</p><p> # {{post.id}}</p>
+          <div>
+              <p>{{post.content}}</p>
+              {% if post.url_file%}
+             <div class="post-image">
+                 <img src="{% static post.url_file %}"/>
+             </div>
+              {% endif %}
+          </div>
+
+
+     <div class="create-delete">
+      {% if request.user == post.author_post %}
+          <a href="{% url 'post-up' post.id %}">&#9998</a>
+          <a href="{% url 'delete-post' post.id %}">✘</a>
+      {% endif %}
+
+     </div>
+     </div>
+    {% endfor %}
+
+  </div>
+{% endblock content %}

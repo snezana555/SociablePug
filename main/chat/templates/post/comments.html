@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}{{chat.name}}{% endblock %}
+
+{% block header %}
+ <header class="nav">
+     <div class="nav-find">
+         <form method="GET" action="{% url 'posts' %}">
+             <label>Поиск поста</label>
+             <br>
+             <input type="text" class="find" name="find" placeholder="Найти..">
+         </form>
+     </div>
+     <div class="user-name">
+         <p> Ваше имя: {{request.user}}</p>
+     </div>
+     <div class="nav-exit">
+         <a href="{% url 'log-out' %}" class="nav-exit"> Выйти </a>
+     </div>
+ </header>
+{% endblock %}
+
+{% block content %}
+
+<div class="post-wrapper">
+  <div class="post">
+      <p class="name-post"> {{post.title}} </p>
+      <p> #{{post.id}} </p>
+      <div class="comment">
+          {% for comm in comments %}
+           <div class="post-elements">
+              <p class="name-author-comment">{{ comm.user }} {{ comm.date }}</p>
+              <strong class="post-elements">{{comm.words}}</strong>
+              {% if request.user == comm.user %}
+              <p class="create-delete"><a href="{% url 'del-comment' comm.id post.id%}">✘</a></p>
+              {% endif %}
+         </div>
+          {% endfor %}
+
+      </div>
+  </div>
+</div>
+  <div class="form">
+      {% if request.user.is_authenticated %}
+      <form method="POST" action="" id="comment">
+          {% csrf_token %}
+          <input type="text" id="cmnt" cols="30" rows="10" required/>
+          <input type="submit" value="Отправить" class="submit"/>
+      </form>
+      {% endif %}
+  </div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script>
+    $(document).on('submit', '#comment', function(e){
+        e.preventDefault();
+        $.ajax({
+            type: 'POST',
+            url: "",
+            data: {
+                comment: $('#cmnt').val(),
+                csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val()
+            }
+        });
+        $( ".post" ).load(window.location.href + " .post" );
+        document.querySelector("#cmnt").value = "";
+    })
+$(document).ready(function(){
+    setInterval(function(){
+        $( ".comment" ).load(window.location.href + " .comment" );
+    }, 1000)
+})
+</script>
+
+{% endblock content %}

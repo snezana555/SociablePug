@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+  <a href="{% url 'index' %}" class="return"> < </a>
+  <br>
+<div class="chat-wrapper">
+  <div class="chat">
+      <p class="name-chat"> {{chat.name}} </p>
+      <p> {{chat.text}} </p>
+      <div class="message">
+          {% for mess in messages %}
+           <div class="messag">
+              <p class="name-author-message">{{ mess.user }} {{ mess.date }}</p>
+              <strong class= messag>{{mess.words}}</strong>
+              {% if request.user == mess.user %}
+              <p class="create-delete"><a href="{% url 'del-message' mess.id chat.id%}">✘</a></p>
+              {% endif %}
+         </div>
+          {% endfor %}
+
+      </div>
+  </div>
+</div>
+  <div class="form">
+      {% if request.user.is_authenticated %}
+      <form method="POST" action="" id="message">
+          {% csrf_token %}
+          <input type="text" id="msg" cols="30" rows="10" required/>
+          <input type="submit" value="Отправить" class="submit"/>
+      </form>
+      {% endif %}
+  </div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script>
+    $(document).on('submit', '#message', function(e){
+        e.preventDefault();
+        $.ajax({
+            type: 'POST',
+            url: "",
+            data: {
+                message: $('#msg').val(),
+                csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val()
+            }
+        });
+        $( ".chat" ).load(window.location.href + " .chat" );
+        document.querySelector("#msg").value = "";
+    })
+$(document).ready(function(){
+    setInterval(function(){
+        $( ".message" ).load(window.location.href + " .message" );
+    }, 1000)
+})
+</script>
+
+{% endblock content %}
+
+

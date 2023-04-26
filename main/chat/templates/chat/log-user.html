@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Авторизация{% endblock %}
+{% block content %}
+
+  <div class="log-user">
+      <p class="name-log">Авторизация</p>
+      <form method="POST" action="">
+          {% csrf_token %}
+          <label>Ваше имя:</label>
+          <input type="text" name="user-name" class="input-border"/>
+          <br><br>
+          <label>Пароль:</label>
+          <input type="password" name="password" class="input-border"/>
+          <br><br>
+          <input type="submit" value="Войти" class="btn"/>
+          <br><br>
+      </form>
+      <a href="{% url 'reg-user' %}">Зарегистрироваться здесь</a>
+      <br>
+      <a href="{% url 'change-password' %}">Забыли пароль?</a>
+  </div>
+
+{% endblock content %}

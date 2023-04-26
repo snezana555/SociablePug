@@ -1,0 +1,59 @@
+html {
+    box-sizing: border-box;
+    font-size: 16px;
+  }
+
+*, *:before, *:after {
+    box-sizing: inherit;
+}
+
+body{
+  background-position: center;
+  background-image: url(image/fon-tital.jpg);
+   background-repeat: no-repeat;
+   background-attachment: fixed;
+   background-size: cover;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6, p, ol, ul {
+    margin: 0;
+    padding: 0;
+    font-weight: normal;
+}
+
+ol, ul {
+    list-style: none;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+.box_border{
+  border: 10px solid #afc08e; /* Толщина рамки */
+  border-radius: 25px; /* сглаживает углы */
+  background: #dbe8bf;
+  padding: 25px 14px ; /* Сверху | Справа | Снизу | Слева */
+  margin: 150px 40px; /* Положение на странице => в углу сделал */
+  width: 380px;
+}
+
+a.but_auth {
+  color: #000; /* цвет текста */
+  text-decoration: none; /* убирать подчёркивание у ссылок */
+  user-select: none; /* убирать выделение текста */
+  background: #fff; /* фон кнопки */
+  padding: .7em 1.5em; /* отступ от текста */
+  outline: none; /* убирать контур в Mozilla */
+  border-radius: 15px;
+  left: 15px;
+  top: 15px;
+  text-align: center;
+  margin: 0 auto;
+  display: block;
+}
+
+a.but_auth:hover { background: rgb(220, 215, 215); } /* при наведении курсора мышки */
+a.but_auth:active { background: #cbdda5; } /* при нажатии */

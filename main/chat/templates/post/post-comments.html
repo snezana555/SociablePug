@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}{{chat.name}}{% endblock %}
+
+{% block header %}
+ <header class="nav">
+     <div class="nav-find">
+         <form method="GET" action="{% url 'posts' %}">
+             <label>Поиск поста</label>
+             <br>
+             <input type="text" class="find" name="find" placeholder="Найти..">
+         </form>
+     </div>
+     <div class="user-name">
+         <p> Ваше имя: {{request.user}}</p>
+     </div>
+     <div class="nav-exit">
+         <a href="{% url 'log-out' %}" class="nav-exit"> Выйти </a>
+     </div>
+ </header>
+{% endblock %}
+
+{% block content %}
+
+  <a href="{% url 'posts' %}" class="return"> < </a>
+  <br>
+  <div class="post">
+      <p class="name-post"> {{post.title}} </p>
+      <div> #{{post.id}}</div>
+
+      <div class="comment-list">
+          {% for comment in comment %}
+           <div class="post-elements">
+              <p class="name-author-comment">{{comment.user}} {{comment.date}} </p>
+              <p>{{comment.words}}</p>
+              {% if request.user == comment.user %}
+              <p class="create-delete"><a href="{% url 'del-comment' comment.id post.id%}">✘</a></p>
+              {% endif %}
+          </div>
+          {% endfor %}
+      </div>
+  </div>
+
+  <div class="comment">
+      {% if request.user.is_authenticated %}
+      <form method="POST" action="">
+          {% csrf_token %}
+          <input type="text" name="words" placeholder="Комментарий..." class="input-border">
+          <input type="submit" value="Отправить" class="send-form btn-send"/>
+      </form>
+      {% endif %}
+  </div>
+
+{% endblock content %}
