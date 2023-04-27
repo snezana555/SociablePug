@@ -9,16 +9,21 @@
 </head>
 
 <body>
-    <div class="box_border">
+    <div class="main">
+        <div class="main__text">
+            <h1>Sociable pug</h1>
+        </div>
+        
+        <div class="box_border">
 
-        <a href="{% url 'log-user' %}" class="but_auth">Авторизация</a>
+            <a href="{% url 'log-user' %}" class="but_auth">Авторизация</a>
 
-        <br>
-        <a href="{% url 'reg-user' %}" class="but_auth">Регистрация</a>
+            <br>
+            <a href="{% url 'reg-user' %}" class="but_auth">Регистрация</a>
 
 
+        </div>
     </div>
-
 </body>
 
 </html>
