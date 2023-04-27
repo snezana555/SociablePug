@@ -26,8 +26,8 @@
   <div class="delete-chat">
       <form method="POST" action="">
           {% csrf_token %}
-          <p>Точно хотите удалить чат под названием "{{chat}}"? </p>
-          <input type="submit" value="Удалить" class="btn"/>
+          <p>Точно хотите удалить чат под названием "{{chat.name}}"? </p>
+          <input type="submit" value="Удалить" class="btn_del"/>
       </form>
   </div>
 {% endblock content %}

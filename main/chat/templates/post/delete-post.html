@@ -27,7 +27,7 @@
       <form method="POST" action="">
           {% csrf_token %}
           <p>Точно хотите удалить пост под названием "{{post.title}}"? </p>
-          <input type="submit" value="Удалить" class="btn"/>
+          <input type="submit" value="Удалить" class="btn_del"/>
       </form>
   </div>
 {% endblock content %}

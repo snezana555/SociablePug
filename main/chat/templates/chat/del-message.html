@@ -25,7 +25,7 @@
   <div class="del-message">
     <form method="POST" action="">
     {% csrf_token %}
-      <p>Точно хотите удалить сообщение "{{message}}"? </p>
+      <p>Точно хотите удалить сообщение "{{message.words}}"? </p>
       <input type="submit" value="Удалить" class="btn_del"/>
     </form>
   </div>
